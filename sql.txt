@@ -1,0 +1,90 @@
+
+CREATE SCHEMA IF NOT EXISTS `mintransp` DEFAULT CHARACTER SET utf8 ;
+USE `mintransp` ;
+
+
+
+-- -----------------------------------------------------
+-- Table `minTransporte`.`users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mintransp`.`users` (
+  `idUser` INT NOT NULL,
+  `cardBalance` INT NULL,
+  `numberTravelDiary` INT NULL,
+  `frequentSchedules` VARCHAR(45) NULL,
+  `frequentRoutes` VARCHAR(45) NULL,
+  PRIMARY KEY (`idUser`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `minTransporte`.`meansTransport`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mintransp`.`meansTransport` (
+  `idmeansTransport` INT NOT NULL,
+  `type` VARCHAR(45) NULL,
+  `numberRoute` INT NULL,
+  `plate` VARCHAR(6) NULL,
+  `operatingCompany` VARCHAR(45) NULL,
+  PRIMARY KEY (`idmeansTransport`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `minTransporte`.`rechargesTransactions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mintransp`.`rechargesTransactions` (
+  `idrechargesTransactions` INT NOT NULL,
+  `record` VARCHAR(45) NULL,
+  `pointsSale` VARCHAR(45) NULL,
+  `reloadingSchedule` VARCHAR(45) NULL,
+  `users_idUser` INT NOT NULL,
+  PRIMARY KEY (`idrechargesTransactions`),
+  INDEX `fk_rechargesTransactions_users_idx` (`users_idUser` ASC) VISIBLE,
+  CONSTRAINT `fk_rechargesTransactiomeanstransportmeanstransportns_users`
+    FOREIGN KEY (`users_idUser`)
+    REFERENCES `mintransp`.`users` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `minTransporte`.`alerts`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mintransp`.`alerts` (
+  `idAlerts` INT NOT NULL,
+  `rechargeTime` DATE NULL,
+  `rechargeDevice` VARCHAR(45) NULL,
+  `rechargeLocation` VARCHAR(45) NULL,
+  `rechargesTransactions_idrechargesTransactions` INT NOT NULL,
+  PRIMARY KEY (`idAlerts`),
+  INDEX `fk_alerts_rechargesTransactions1_idx` (`rechargesTransactions_idrechargesTransactions` ASC) VISIBLE,
+  CONSTRAINT `fk_alerts_rechargesTransactions1`
+    FOREIGN KEY (`rechargesTransactions_idrechargesTransactions`)
+    REFERENCES `mintransp`.`rechargesTransactions` (`idrechargesTransactions`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `minTransporte`.`users_has_meansTransport`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mintransp`.`users_has_meansTransport` (
+  `users_idUser` INT NOT NULL,
+  `meansTransport_idmeansTransport` INT NOT NULL,
+  PRIMARY KEY (`users_idUser`, `meansTransport_idmeansTransport`),
+  INDEX `fk_users_has_meansTransport_meansTransport1_idx` (`meansTransport_idmeansTransport` ASC) VISIBLE,
+  INDEX `fk_users_has_meansTransport_users1_idx` (`users_idUser` ASC) VISIBLE,
+  CONSTRAINT `fk_users_has_meansTransport_users1`
+    FOREIGN KEY (`users_idUser`)
+    REFERENCES `mintransp`.`users` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_has_meansTransport_meansTransport1`
+    FOREIGN KEY (`meansTransport_idmeansTransport`)
+    REFERENCES `mintransp`.`meansTransport` (`idmeansTransport`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;

@@ -1,18 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Registrar Usuario</title>
+  <meta charset="UTF-8" />
+  <title>Registrar Datos</title>
 </head>
 <body>
-  <h1>Formulario para registrar usuario</h1>
-  <form action="/register-user" method="post">
-    <label>ID Usuario: <input type="number" name="idUser" required></label><br><br>
-    <label>Saldo de la tarjeta: <input type="number" name="cardBalance"></label><br><br>
-    <label>Diario de viajes: <input type="number" name="numberTravelDiary"></label><br><br>
-    <label>Horarios frecuentes: <input type="text" name="frequentSchedules"></label><br><br>
-    <label>Rutas frecuentes: <input type="text" name="frequentRoutes"></label><br><br>
-    <button type="submit">Registrar</button>
-  </form>
+
+  <div>
+    <h1>Formulario para registrar usuario</h1>
+    <form action="/register-user" method="post">
+      <label>ID Usuario: <input type="number" name="idUser" required></label><br><br>
+      <label>Saldo de la tarjeta: <input type="number" name="cardBalance"></label><br><br>
+      <label>Diario de viajes: <input type="number" name="numberTravelDiary"></label><br><br>
+      <label>Horarios frecuentes: <input type="text" name="frequentSchedules"></label><br><br>
+      <label>Rutas frecuentes: <input type="text" name="frequentRoutes"></label><br><br>
+      <button type="submit">Registrar Usuario</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <div>
+    <h1>Formulario para registrar medio de transporte</h1>
+    <form action="/register-meansTransport" method="post">
+      <label>ID medio de transporte: <input type="number" name="idmeansTransport" required></label><br><br>
+      <label>Tipo: <input type="text" name="type"></label><br><br>
+      <label>Número de ruta: <input type="number" name="numberRoute"></label><br><br>
+      <label>Placa: <input type="text" name="plate" maxlength="6"></label><br><br>
+      <label>Empresa operadora: <input type="text" name="operatingCompany"></label><br><br>
+      <button type="submit">Registrar Medio de Transporte</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <div>
+    <h1>Formulario para registrar recarga</h1>
+    <form action="/register-recharge" method="post">
+      <label>ID transacción: <input type="number" name="idrechargesTransactions" required></label><br><br>
+      <label>Registro: <input type="text" name="record"></label><br><br>
+      <label>Punto de venta: <input type="text" name="pointsSale"></label><br><br>
+      <label>Horario de recarga: <input type="text" name="reloadingSchedule"></label><br><br>
+      <label>ID Usuario: <input type="number" name="users_idUser" required></label><br><br>
+      <button type="submit">Registrar Recarga</button>
+    </form>
+  </div>
+
 </body>
 </html>
